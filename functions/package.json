@@ -15,7 +15,8 @@
   "main": "lib/index.js",
   "dependencies": {
     "firebase-admin": "~7.0.0",
-    "firebase-functions": "^2.3.0"
+    "firebase-functions": "^2.3.0",
+    "puppeteer": "^1.20.0"
   },
   "devDependencies": {
     "tslint": "^5.12.0",
