@@ -26,20 +26,17 @@ async function setShopData(shop: any) {
     const shopNameTag = await shop.$('.shop_name');
     const shopNameEnTag = await shopNameTag.$('.en');
     const shopNameTextContent = await shopNameEnTag.getProperty('textContent');
-    const shopNameEn: string = await shopNameTextContent.jsonValue()
+    const shopNameEn: string = await shopNameTextContent.jsonValue();
 
     const numTag = await shop.$('.num');
 
-    const manTag = await numTag.$('.man')
+    const manTag = await numTag.$('.man');
     const manTagText = await manTag.getProperty('textContent');
     const man: string = await manTagText.jsonValue();
 
     const womanTag = await numTag.$('.woman');
     const womanTagText = await womanTag.getProperty('textContent');
     const woman: string = await womanTagText.jsonValue();
-
-    // firestoreに保存
-    const ref = firestore.collection(shopNameEn);
 
     console.log('shop_name_en', shopNameEn);
     console.log('man', man);
@@ -51,6 +48,9 @@ async function setShopData(shop: any) {
         man: man,
         woman: woman,
         timestamp: timestamp,
-    }
-    ref.add(data);
+    };
+
+    // firestoreに保存
+    const ref = firestore.collection('shops');
+    ref.doc(shopNameEn).collection('logs').add(data);
 }
