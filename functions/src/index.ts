@@ -52,5 +52,9 @@ async function setShopData(shop: any) {
 
     // firestoreに保存
     const ref = firestore.collection('shops');
+
+    ref.doc(shopNameEn).set(data);
+
+    // logに保存
     ref.doc(shopNameEn).collection('logs').add(data);
 }
